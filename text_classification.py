@@ -26,10 +26,18 @@ except:
 	nltk.download('punkt')
 
 
-_s3_bucket_name = 'sagemaker-ap-south-1-907831156916'
-_s3_access_key = 'AKIA5GXXUEC2FCKLQSQ4'
-_s3_secret_key = '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'
-_s3_region_name = 'ap-south-1'
+def read_json_file(filePath):
+	file = open(filePath)
+	data = json.loads(file.read())
+	file.close()
+	return data
+
+config = read_json_file('configuration.json')
+
+_s3_bucket_name = config['_s3_bucket_name']
+_s3_access_key = config['_s3_access_key']
+_s3_secret_key = config['_s3_secret_key']
+_s3_region_name = config['_s3_region_name']
 
 _s3_raw_dataset_dir = '001_raw_dataset/'
 _s3_dataset_dir = '002_dataset/'
